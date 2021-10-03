@@ -7,4 +7,3 @@ export const addCommentThunk = (comment) => (dispatch, getState) => {
 
     dispatch(addComment(updateUser));
   };
-

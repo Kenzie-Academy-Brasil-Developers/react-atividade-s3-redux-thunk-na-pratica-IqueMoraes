@@ -1,33 +1,38 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addCommentThunk } from "../../store/modules/user/thunk";
+import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import { addCommentThunk } from "../../store/modules/user/thunk"
 
-export default function ActionWithThunk() {
-  const dispatch = useDispatch();
-  const [comment, setComment] = useState("");
-  const user = useSelector((state) => state.user);
 
-  const handleClick = () => {
-    dispatch(addCommentThunk(comment));
-  };
 
-  console.log(user.comments);
+export const Display = () => {
+    const dispatch = useDispatch()
+    const [userComments, setUserComments] = useState("")
+    const user = useSelector(state => state.user)
 
-  return (
-    <div>
-      <h2>{user.name}</h2>
-      <input
-        type="text"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-      <button onClick={() => handleClick(comment)}>Novo comentário</button>
+    const handleAddComment = () => {
+        dispatch(addCommentThunk(userComments))
+        setUserComments("")
+    }
 
-      <div>
-        {user.comments.map((item, index) => (
-          <p key={index}> - {item}</p>
-        ))}
-      </div>
-    </div>
-  );
+    console.log(user)
+
+    return (
+        <div className="container">
+            <div className="container-title">
+                <h3>{user.name}</h3>
+            </div>
+            <input value={userComments} placeholder="Comment..." onChange={evt => setUserComments(evt.target.value)}/>{" "}
+
+            {userComments === "" 
+             ?
+             <button onClick={() => handleAddComment(userComments)}>New comment</button>
+             :
+             <button onClick={() => handleAddComment(userComments)}>New comment</button>
+            }
+            
+            <div className="user">
+                {user.comments.map(us => <h4 key={us}>{us}</h4>)}
+            </div>
+        </div>
+    )
 }

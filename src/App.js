@@ -1,11 +1,11 @@
 import "./App.css";
-import ActionWithThunk from "./components/ActionWithThunk";
+import { Display } from "./components/ActionWithThunk";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ActionWithThunk />
+        <Display />
       </header>
     </div>
   );
